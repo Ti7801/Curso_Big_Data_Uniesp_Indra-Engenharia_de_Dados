@@ -62,6 +62,7 @@ hdfs dfs -du -s -h /input/file.txt
 #Contar linhas
 hdfs dfs -cat /input/file.txt | wc -l
 
-
+#Criar arquivo vazio no hdfs
+hadoop fs -touchz dir/
 
 

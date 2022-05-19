@@ -1,0 +1,7 @@
+PS C:\Windows\system32> net stop winnat
+
+O serviço de Driver NAT do Windows foi finalizado com êxito.
+
+PS C:\Windows\system32> net start winnat
+
+O serviço de Driver NAT do Windows foi iniciado com êxito.

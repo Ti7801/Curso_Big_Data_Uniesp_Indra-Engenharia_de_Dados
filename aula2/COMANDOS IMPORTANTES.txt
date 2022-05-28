@@ -1,0 +1,25 @@
+Aqui podemos sair do shell do hive pelos seguintes 3 comandos
+
+ exit;  quit; Como todos sabemos que podemos conectar ao hiveserver2 a 
+partir de  docker exec -it hive-server bash.
+
+
+Então, beeline,jdbc-odbc,trift apiquando você estiver usando o shell beeline, 
+os dois primeiros comandos não funcionarão, então é melhor usar o seguinte comando para 
+sair do beeline.
+
+!exit
+
+nenhum ponto e vírgula deve ser usado.
+
+
+
+
+Quando você está dentro hive(0: jdbc:hive2://localhost:10000/>), e dar enter e aparece
+
+...............................>
+
+
+você pode sair utilizando:
+
+!exit;

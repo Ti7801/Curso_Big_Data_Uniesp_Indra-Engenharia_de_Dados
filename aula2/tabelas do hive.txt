@@ -1,0 +1,33 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS treinamento.alunos_stg(
+`id_discente` string,
+`nome` string,
+`ano_ingresso` string,
+`periodo_ingresso` string,
+`nivel` string,
+`id_forma_ingresso` string,
+`id_curso` string
+)
+COMMENT 'Tabela Externa de Alunos'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/aluno/dados'
+tblproperties ('skip.header.line.count'='1', 'store.charset'='UTF-8',
+'retrieve.charset'='UTF-8');
+
+
+
+create table treinamento.alunos (
+`id_discente` string,
+`nome` string,
+`ano_ingresso` int,
+`periodo_ingresso` int,
+`nivel` string,
+`id_forma_ingresso` string,
+`id_curso` string
+)
+PARTITIONED BY (DT_FOTO STRING)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
+TBLPROPERTIES ( 'orc.compress'='SNAPPY');

@@ -8,7 +8,7 @@ O serviço de Driver NAT do Windows foi iniciado com êxito.
 
 
 
- CREATE EXTERNAL TABLE IF NOT EXISTS cursos_stg( 
+ CREATE EXTERNAL TABLE IF NOT EXISTS treinamento_tiago.cursos_stg( 
 `id_curso` int,
 `id_unidade` int,
 `codigo` int,
@@ -46,7 +46,7 @@ SELECT * FROM cursos_stg LIMIT 5;
 
 
 
-create table cursos(
+create table treinamento_tiago.cursos(
 `id_curso` int,
 `id_unidade` int,
 `codigo` int,
@@ -74,9 +74,54 @@ SET hive.exec.dynamic.partition.mode=nonstrict;
 
 
 
+id_curso int,
+id_unidade,
+codigo ,
+nome ,
+nivel ,
+id_modalidade_educacao,
+id_municipio,
+id_tipo_oferta_curso,
+id_area_curso,
+id_grau_academico,
+id_eixo_conhecimento,
+ativo
+
+
+
+ INSERT OVERWRITE TABLE treinamento_tiago.cursos
+ PARTITION(dt_foto)
+ SELECT
+ id_curso,
+ id_unidade,
+ codigo,
+ nome,
+ nivel,
+ id_modalidade_educacao,
+ id_municipio,
+ id_tipo_oferta_curso,
+ id_area_curso,
+ id_grau_academico,
+ id_eixo_conhecimento,
+ ativo,
+'21052022' as dt_foto
+from treinamento_tiago.cursos_stg;
+
+
+
+
 
 0: jdbc:hive2://localhost:10000> INSERT INTO cursos_stg(id_curso,id_unidade,codigo,nome,nivel,id_modalidade_educacao,id_municipio,id_tipo_oferta_curso,id_area_curso,id_grau_academico,id_eixo_conhecimento,ativo)
 . . . . . . . . . . . . . . . .> select id_curso,id_unidade,codigo,nome,nivel,id_modalidade_educacao,id_municipio,id_tipo_oferta_curso,id_area_curso,id_grau_academico,id_eixo_conhecimento,ativo, ' '
 . . . . . . . . . . . . . . . .> from treinamento.cursos;
 
 
+
+
+
+mover arquivo do linux para container
+
+
+
+
+docker cp dados.csv mycontainer:/home/jovyan/work/dados.csv

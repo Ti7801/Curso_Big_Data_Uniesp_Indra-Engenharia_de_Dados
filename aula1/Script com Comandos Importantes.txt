@@ -1,3 +1,5 @@
+COMANDOS UTILIZADOS PARA RESOLVER O PROBLEMA DAS PORTAS:
+
 PS C:\Windows\system32> net stop winnat
 
 O serviço de Driver NAT do Windows foi finalizado com êxito.

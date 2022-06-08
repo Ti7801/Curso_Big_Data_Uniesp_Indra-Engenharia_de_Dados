@@ -1,0 +1,129 @@
+COMANDOS UTILIZADOS PARA RESOLVER O PROBLEMA DAS PORTAS:
+
+PS C:\Windows\system32> net stop winnat
+
+O serviço de Driver NAT do Windows foi finalizado com êxito.
+
+PS C:\Windows\system32> net start winnat
+
+O serviço de Driver NAT do Windows foi iniciado com êxito.
+
+
+
+ CREATE EXTERNAL TABLE IF NOT EXISTS treinamento_tiago.cursos_stg( 
+`id_curso` int,
+`id_unidade` int,
+`codigo` int,
+`nome` string,
+`nivel` string,
+`id_modalidade_educacao` int,
+`id_municipio` int,
+`id_tipo_oferta_curso` int,
+`id_area_curso` int,
+`id_grau_academico` int,
+`id_eixo_conhecimento` int,
+`ativo` string) 
+
+COMMENT 'Tabela Externa de Cursos' 
+row format delimited
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+ LOCATION '/user/aluno/dados/curso/';
+
+
+
+
+TENTAR COLOCAR  ", " EM  FIELDS TERMINATED ','
+
+
+
+
+COMANDO PARA VER AS 5 PRIMEIRAS LINHAS
+
+SELECT * FROM cursos_stg LIMIT 5;
+
+
+
+
+
+
+
+create table treinamento_tiago.cursos(
+`id_curso` int,
+`id_unidade` int,
+`codigo` int,
+`nome` string,
+`nivel` string,
+`id_modalidade_educacao` int,
+`id_municipio` int,
+`id_tipo_oferta_curso` int,
+`id_area_curso` int,
+`id_grau_academico` int,
+`id_eixo_conhecimento` int,
+`ativo` string)
+
+PARTITIONED BY (dt_foto STRING)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+STORED AS INPUTFORMAT 'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
+TBLPROPERTIES ( 'orc.compress'='SNAPPY');
+
+SET hive.exec.dynamic.partition=true;
+SET hive.exec.dynamic.partition.mode=nonstrict;
+
+
+
+
+
+
+id_curso int,
+id_unidade,
+codigo ,
+nome ,
+nivel ,
+id_modalidade_educacao,
+id_municipio,
+id_tipo_oferta_curso,
+id_area_curso,
+id_grau_academico,
+id_eixo_conhecimento,
+ativo
+
+
+
+ INSERT OVERWRITE TABLE treinamento_tiago.cursos
+ PARTITION(dt_foto)
+ SELECT
+ id_curso,
+ id_unidade,
+ codigo,
+ nome,
+ nivel,
+ id_modalidade_educacao,
+ id_municipio,
+ id_tipo_oferta_curso,
+ id_area_curso,
+ id_grau_academico,
+ id_eixo_conhecimento,
+ ativo,
+'21052022' as dt_foto
+from treinamento_tiago.cursos_stg;
+
+
+
+
+
+0: jdbc:hive2://localhost:10000> INSERT INTO cursos_stg(id_curso,id_unidade,codigo,nome,nivel,id_modalidade_educacao,id_municipio,id_tipo_oferta_curso,id_area_curso,id_grau_academico,id_eixo_conhecimento,ativo)
+. . . . . . . . . . . . . . . .> select id_curso,id_unidade,codigo,nome,nivel,id_modalidade_educacao,id_municipio,id_tipo_oferta_curso,id_area_curso,id_grau_academico,id_eixo_conhecimento,ativo, ' '
+. . . . . . . . . . . . . . . .> from treinamento.cursos;
+
+
+
+
+
+mover arquivo do linux para container
+
+
+
+
+docker cp dados.csv mycontainer:/home/jovyan/work/dados.csv

@@ -1,7 +1,0 @@
-Scala, java, python, R.
-
-Linguagem utilizadas para o Spark
-
-- Spark ler dados em tempo real(Em tempo de execução).
-- Utiliza machine larning também.
-- 
